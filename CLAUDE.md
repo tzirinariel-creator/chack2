@@ -3,52 +3,77 @@
 ## Project Overview
 
 **Repository:** chack2
-**Status:** New project — initial setup phase
+**Project:** "מוביל" — משחק החלטות אסטרטגי בדפדפן
 **Owner:** tzirinariel-creator
+**Tech stack:** HTML, CSS, JavaScript (vanilla — no frameworks)
+**Language:** Hebrew (RTL)
 
-This is a new repository that is being set up from scratch. As the project evolves, this file should be updated to reflect the current state of the codebase.
+A browser-based strategy/decision game where the player leads a small team through a survival journey. Each round presents a dilemma with meaningful choices that affect team resources (people, food, morale, supplies). The game runs 10 rounds.
 
 ## Repository Structure
 
 ```
 chack2/
-├── CLAUDE.md          # This file — AI assistant guide
-└── (project files to be added)
+├── CLAUDE.md       # This file — AI assistant guide
+├── index.html      # Main game page (entry point)
+├── style.css       # All styling — earth/nature color palette, RTL
+└── game.js         # Game logic — state, events, choices, rendering
 ```
 
-## Getting Started
+## How to Run
 
-This project has not yet been initialized with a language or framework. The next steps are:
+Open `index.html` in any browser. No build step, no server needed.
 
-1. Choose a language/framework
-2. Initialize the project (e.g., `npm init`, `cargo init`, `python -m venv`, etc.)
-3. Set up linting and formatting
-4. Add a README.md
-5. Configure CI/CD
+## Architecture
 
-## Development Workflow
+### index.html
+Three screens managed by toggling the `.active` class:
+- `#start-screen` — intro and start button
+- `#game-screen` — resource bar, event area, choices, results
+- `#end-screen` — final stats and restart
 
-### Branching
+### style.css
+- CSS variables in `:root` for the color palette (earth tones: greens, sand, cream)
+- RTL layout with `direction: rtl`
+- Responsive grid for resources and stats
+- Flash animations for resource changes
 
-- Main development branch: `main`
-- Feature branches follow the pattern: `claude/<description>-<session-id>`
+### game.js
+- `state` object holds round number, resources, and used events
+- `events` array contains all dilemmas with choices and effects
+- Key functions: `getRandomEvent()`, `applyEffects()`, `startRound()`, `handleChoice()`, `endGame()`
+- Game over conditions: no people, no food+morale, or survived 10 rounds
 
-### Commits
+## Adding Content
 
-- Use clear, descriptive commit messages
-- Follow conventional commits style when possible (e.g., `feat:`, `fix:`, `docs:`, `chore:`)
+To add a new event/dilemma, add an object to the `events` array in `game.js`:
+```js
+{
+    title: "שם האירוע",
+    description: "תיאור המצב...",
+    choices: [
+        {
+            label: "שם הבחירה",
+            desc: "תיאור קצר",
+            result: "מה קורה אחרי הבחירה",
+            effects: { food: -10, morale: 5 }
+        }
+    ]
+}
+```
 
 ## Conventions
 
-- Keep code simple and readable
-- Prefer small, focused functions
-- Write tests for new functionality
-- Update this CLAUDE.md file as the project structure evolves
+- All user-facing text is in Hebrew
+- Keep code vanilla JS — no frameworks or build tools
+- Color palette: earth tones (see CSS variables)
+- Game balance: effects should typically range from -20 to +25
+- Each event should have 2-3 meaningful choices with real trade-offs
 
 ## Instructions for AI Assistants
 
 - Always read relevant files before making changes
-- Do not over-engineer — keep solutions simple and focused
-- When adding new dependencies, verify they are well-maintained and necessary
-- Update this file when significant project structure changes are made
-- Follow existing code style and patterns as they are established
+- Keep solutions simple — this is a learning project
+- Maintain the Hebrew language for all UI text
+- When adding events, ensure choices present genuine dilemmas (no "obviously correct" answer)
+- Update this file when project structure changes

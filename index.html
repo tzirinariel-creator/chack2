@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מוביל — משחק החלטות</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- מסך פתיחה -->
+    <div id="start-screen" class="screen active">
+        <div class="container">
+            <h1>מוביל</h1>
+            <p class="subtitle">משחק החלטות אסטרטגי</p>
+            <p class="description">
+                אתה מוביל קבוצה קטנה במסע הישרדות.<br>
+                כל סיבוב תעמוד בפני דילמה — ההחלטות שלך ישפיעו על הצוות.<br>
+                שרוד 10 סיבובים. אין תשובות נכונות — יש רק בחירות.
+            </p>
+            <button id="start-btn" class="btn btn-primary">יאללה, מתחילים</button>
+        </div>
+    </div>
+
+    <!-- מסך משחק -->
+    <div id="game-screen" class="screen">
+        <div class="container">
+            <!-- סרגל משאבים -->
+            <div class="resources-bar">
+                <div class="resource">
+                    <span class="resource-icon">👥</span>
+                    <span class="resource-label">אנשים</span>
+                    <span id="res-people" class="resource-value">8</span>
+                </div>
+                <div class="resource">
+                    <span class="resource-icon">🍞</span>
+                    <span class="resource-label">מזון</span>
+                    <span id="res-food" class="resource-value">70</span>
+                </div>
+                <div class="resource">
+                    <span class="resource-icon">🔥</span>
+                    <span class="resource-label">מורל</span>
+                    <span id="res-morale" class="resource-value">60</span>
+                </div>
+                <div class="resource">
+                    <span class="resource-icon">🛠️</span>
+                    <span class="resource-label">ציוד</span>
+                    <span id="res-supplies" class="resource-value">50</span>
+                </div>
+            </div>
+
+            <!-- מונה סיבובים -->
+            <div class="round-counter">
+                סיבוב <span id="current-round">1</span> מתוך 10
+            </div>
+
+            <!-- אזור האירוע -->
+            <div class="event-area">
+                <h2 id="event-title" class="event-title"></h2>
+                <p id="event-description" class="event-description"></p>
+            </div>
+
+            <!-- אזור הבחירות -->
+            <div id="choices-area" class="choices-area"></div>
+
+            <!-- תוצאת הבחירה -->
+            <div id="result-area" class="result-area hidden">
+                <p id="result-text" class="result-text"></p>
+                <div id="result-effects" class="result-effects"></div>
+                <button id="next-btn" class="btn btn-secondary">הסיבוב הבא</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- מסך סיום -->
+    <div id="end-screen" class="screen">
+        <div class="container">
+            <h1 id="end-title"></h1>
+            <p id="end-summary" class="description"></p>
+            <div id="final-stats" class="final-stats"></div>
+            <button id="restart-btn" class="btn btn-primary">שחק שוב</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
